@@ -16,7 +16,14 @@
   <body>
     <div class="container">
       <div class="padded-card">
-        <input id="fileInput" type="file" accept=".txt" />
+        <input
+          type="file"
+          id="fileInput"
+          accept=".txt"
+          style="display: none;"
+        />
+        <label class="select-btn" for="fileInput">Select file</label>
+        <label id="fileLabel"></label>
       </div>
       <hr />
       <div class="padded-card">
@@ -38,10 +45,8 @@
         <div id="userItems" class="user__items">-</div>
       </div>
       <div class="padded-card pt-3">
-        <div class="stat__title ma-0">Distribution chart</div>
-        <div id="barchartBody">
-          <div style="padding-top: 16px;">-</div>
-        </div>
+        <div class="stat__title">Distribution chart</div>
+        <div id="barchartBody">-</div>
       </div>
       <div class="padded-card pt-3">
         <div class="stat__title">Distribution table</div>

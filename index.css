@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   color: rgba(0, 0, 0, 0.9);
+  transition: all 0.2s ease-in-out;
   font-family: "Barlow", sans-serif;
 }
 
@@ -25,12 +26,19 @@ body {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.pt-3 {
-  padding-top: 12px;
+.select-btn {
+  cursor: pointer;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: #f0f0f0;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+.select-btn:hover {
+  background: #ffffff;
 }
 
-.ma-0 {
-  margin: 0px !important;
+.pt-3 {
+  padding-top: 12px;
 }
 
 .stat__title {
@@ -77,17 +85,21 @@ hr {
 .user__item {
   border: 1px solid rgba(0, 0, 0, 0.2);
   color: rgba(0, 0, 0, 0.7);
+  padding: 3px 12px 5px 12px;
   white-space: nowrap;
   border-radius: 16px;
   margin-bottom: 8px;
   margin-right: 8px;
-  padding: 4px 12px;
+  user-select: none;
   font-size: 14px;
+}
+.user__item:hover {
+  background: #f0f0f0;
 }
 
 .dashboard__number {
   font-size: 32px;
-  color: #3366CC;
+  color: #3366cc;
   font-weight: bold;
   text-align: center;
   padding-bottom: 4px;
@@ -123,4 +135,9 @@ tr:hover {
 
 #tableBody {
   font-size: 14px;
+}
+
+#barchartBody {
+  overflow-x: auto;
+  overflow-y: hidden;
 }
