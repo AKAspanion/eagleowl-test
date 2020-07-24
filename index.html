@@ -3,10 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
     <script defer src="index.js"></script>
     <title>Eagleowl Test</title>
   </head>
   <body>
-    <input id="fileInput" type="file" accept=".txt" />
+    <div class="container">
+      <div class="padded-card">
+        <input id="fileInput" type="file" accept=".txt" />
+      </div>
+      <hr />
+      <div class="padded-card">
+        <div class="stats__container">
+          <div class="stat__title">Stats</div>
+          <div class="dashboard__items">
+            <div class="dashboard__item">
+              <div id="totalOrders" class="dashboard__number">-</div>
+              <div class="dashboard__subtitle">Total orders</div>
+            </div>
+            <div class="dashboard__item">
+              <div id="totalAmount" class="dashboard__number">-</div>
+              <div class="dashboard__subtitle">Total amount</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="padded-card pt-3">
+        <div class="stat__title">Customers with only one order</div>
+        <div id="userItems" class="user__items">-</div>
+      </div>
+      <div class="padded-card pt-3">
+        <div class="stat__title">Distribution</div>
+        <table class="table">
+          <thead class="table__head">
+            <tr class="table__head-row">
+              <th>
+                No. of orders
+              </th>
+              <th>
+                Count of customers
+              </th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <tr>
+              <td colspan="2">
+                <div style="text-align: center;">
+                  No items found
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="padded-card pt-3">
+        <div class="stat__title">Distribution graph</div>
+        <div id="graphBody" class="user__items">-</div>
+      </div>
+    </div>
   </body>
 </html>

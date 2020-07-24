@@ -1,4 +1,5 @@
-document.getElementById("fileInput").addEventListener("change", getFile);
+const fileInput = document.getElementById("fileInput");
+fileInput.addEventListener("change", getFile);
 
 function processData(file) {
   const data = [];
@@ -77,11 +78,57 @@ function calculateStats(data) {
   };
 }
 
+function addUserChip(container, text) {
+  const element = document.createElement("div");
+
+  element.appendChild(document.createTextNode(text));
+  element.classList.add("user__item");
+  container.appendChild(element);
+}
+
+function addTableRow(table, index, size) {
+  const element = document.createElement("tr");
+
+  const nIndex = index > 4 ? index + "+" : index;
+
+  const tdOrders = document.createElement("td");
+  tdOrders.appendChild(document.createTextNode(nIndex));
+  const tdCustomers = document.createElement("td");
+  tdCustomers.appendChild(document.createTextNode(size));
+
+  element.appendChild(tdOrders);
+  element.appendChild(tdCustomers);
+
+  table.appendChild(element);
+}
+
 function renderStats(file) {
   const data = processData(file);
 
-  const aggregatedStat = calculateStats(data);
-  console.log(aggregatedStat);
+  const {
+    totalAmountSum,
+    totalOrdersCount,
+    customerOrderDistribution,
+  } = calculateStats(data);
+
+  const [singleUsers] = customerOrderDistribution;
+
+  document.getElementById("totalOrders").innerHTML = totalOrdersCount;
+  document.getElementById("totalAmount").innerHTML = totalAmountSum;
+
+  const users = document.getElementById("userItems");
+  users.innerHTML = "";
+
+  const table = document.getElementById("tableBody");
+  table.innerHTML = "";
+
+  customerOrderDistribution.forEach((stat, index) => {
+    addTableRow(table, index + 1, stat.length);
+  });
+
+  singleUsers.forEach(({ name }) => {
+    addUserChip(users, name);
+  });
 }
 
 function getFile(event) {
