@@ -1,6 +1,7 @@
 const fileInput = document.getElementById("fileInput");
 fileInput.addEventListener("change", getFile);
 
+// cleans up data
 function processData(file) {
   const data = [];
   const lines = file.split("\n");
@@ -22,6 +23,7 @@ function processData(file) {
   return data.filter((d) => !!d.phone);
 }
 
+// extracts all relevant information
 function calculateStats(data) {
   // map to store data with phone no as key
   const userMap = new Map();
@@ -78,6 +80,7 @@ function calculateStats(data) {
   };
 }
 
+// adds user chips to DOM
 function addUserChip(container, text) {
   const element = document.createElement("div");
 
@@ -86,6 +89,7 @@ function addUserChip(container, text) {
   container.appendChild(element);
 }
 
+// adds table rows to DOM
 function addTableRow(table, index, size) {
   const element = document.createElement("tr");
 
@@ -102,6 +106,37 @@ function addTableRow(table, index, size) {
   table.appendChild(element);
 }
 
+// adds chart to DOM
+function renderChart(distribution) {
+  distributionArray = distribution.map((item, index) => [
+    `${index >= 4 ? index + 1 + "+" : index + 1} order${
+      index !== 0 ? "s" : ""
+    }`,
+    item.length,
+    "#3366CC",
+  ]);
+  distributionArray.unshift(["Orders", "Customers", { role: "style" }]);
+
+  google.charts.load("current", { packages: ["corechart"] });
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable(distributionArray);
+
+    var view = new google.visualization.DataView(data);
+
+    var options = {
+      legend: { position: "top" },
+    };
+    var chart = new google.visualization.BarChart(
+      document.getElementById("barchartBody")
+    );
+
+    chart.draw(view, options);
+  }
+}
+
+// main function that renders the html page
 function renderStats(file) {
   const data = processData(file);
 
@@ -115,6 +150,9 @@ function renderStats(file) {
 
   document.getElementById("totalOrders").innerHTML = totalOrdersCount;
   document.getElementById("totalAmount").innerHTML = totalAmountSum;
+  document.getElementById("barchartBody").innerHTML = "";
+
+  renderChart(customerOrderDistribution);
 
   const users = document.getElementById("userItems");
   users.innerHTML = "";
