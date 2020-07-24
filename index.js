@@ -139,7 +139,7 @@ function renderChart(distribution) {
 // main function that renders the html page
 function renderStats(fileData, fileName) {
   const data = processData(fileData);
-  console.log(fileName)
+
   const {
     totalAmountSum,
     totalOrdersCount,
