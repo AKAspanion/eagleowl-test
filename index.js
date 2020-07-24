@@ -137,9 +137,9 @@ function renderChart(distribution) {
 }
 
 // main function that renders the html page
-function renderStats(file) {
-  const data = processData(file);
-
+function renderStats(fileData, fileName) {
+  const data = processData(fileData);
+  console.log(fileName)
   const {
     totalAmountSum,
     totalOrdersCount,
@@ -150,6 +150,7 @@ function renderStats(file) {
 
   document.getElementById("totalOrders").innerHTML = totalOrdersCount;
   document.getElementById("totalAmount").innerHTML = totalAmountSum;
+  document.getElementById("fileLabel").innerHTML = fileName;
   document.getElementById("barchartBody").innerHTML = "";
 
   renderChart(customerOrderDistribution);
@@ -175,10 +176,11 @@ function getFile(event) {
 
 function fileParser(e, callback) {
   e.preventDefault();
+  const fileName = e.target.files[0].name;
   const reader = new FileReader();
   reader.onload = async (e) => {
     const text = e.target.result;
-    callback(text);
+    callback(text, fileName);
   };
   reader.readAsText(e.target.files[0]);
 }
